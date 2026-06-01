@@ -48,6 +48,7 @@ def pdf_to_excel():
         return cors_response(json.dumps({"error": f"Conversion failed: {e}"}), 500,
                              {"Content-Type": "application/json"})
 
+    logger.info("Conversion successful: %s", summary)
     return cors_response(xlsx_bytes, 200, {
         "Content-Type":        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "Content-Disposition": 'attachment; filename="converted.xlsx"',
@@ -85,6 +86,8 @@ def pdf_to_word():
         logger.exception("Word conversion failed")
         return cors_response(json.dumps({"error": f"Conversion failed: {e}"}), 500,
                              {"Content-Type": "application/json"})
+
+    logger.info("Conversion WOrd to Pdf successful")
 
     return cors_response(docx_bytes, 200, {
         "Content-Type":        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
